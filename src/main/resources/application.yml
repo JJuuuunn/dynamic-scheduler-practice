@@ -1,0 +1,24 @@
+logging:
+  level:
+    root: info
+  file:
+    name: ./logs/dummy.log
+  pattern:
+    console: "%d{HH:mm:ss} - %msg%n"
+
+spring:
+  application:
+    name: dynamic-scheduler
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dummy
+    username: root
+    password: sa
+    jpa:
+      open-in-view: false
+      hibernate:
+        ddl-auto: false
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQLDialect
+

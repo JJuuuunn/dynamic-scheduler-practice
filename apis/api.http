@@ -1,0 +1,31 @@
+### 더미 채널 등록
+POST http://localhost:8080/api/dummyChannel
+Content-Type: application/json
+
+{
+  "deviceCode": "deviceTest1",
+  "channelCode": "code040",
+  "channelTypeId": 1,
+  "minValue": 100,
+  "maxValue": 200,
+  "tenantId": 1,
+  "platformCode": "platform01",
+  "generationInterval": 11
+}
+
+### 더미 채널 삭제
+DELETE http://localhost:8080/api/dummyChannel
+Content-Type: application/json
+
+{
+  "deviceCode": "deviceTest1",
+  "channelCode": "code040",
+  "channelTypeId": 1,
+  "tenantId": 1,
+  "platformCode": "platform01"
+}
+
+### 스케쥴러 리스트
+GET http://localhost:8080/api/scheduler/count
+
+###
