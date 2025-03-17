@@ -34,7 +34,7 @@ public class DummyChannelStore {
      */
     public void addChannel(DummyChannel channel) {
         dataMap.computeIfAbsent(
-                        channel.getGenerationInterval(), // Key(특정 주기)
+                        channel.getCycle(), // Key(특정 주기)
                         k -> new CopyOnWriteArrayList<>() // Value 가 없는 경우, 새로운 리스트 생성
                 )
                 .add(channel);
@@ -44,16 +44,16 @@ public class DummyChannelStore {
      * 특정 주기의 데이터 삭제
      */
     public void removeChannel(DummyChannel channel) {
-        Long period = channel.getGenerationInterval();
+        Long cycle = channel.getCycle();
 
         // 1. 특정 주기의 데이터가 없는 경우, 종료
-        if (dataMap.containsKey(period)) {
-            List<DummyChannel> dataList = dataMap.get(period);
+        if (dataMap.containsKey(cycle)) {
+            List<DummyChannel> dataList = dataMap.get(cycle);
 
             // 2. 특정 주기의 데이터 삭제
             dataList.remove(channel);
             if (dataList.isEmpty()) {
-                dataMap.remove(period);
+                dataMap.remove(cycle);
             }
         }
     }
@@ -61,8 +61,8 @@ public class DummyChannelStore {
     /**
      * 특정 주기의 데이터 가져오기
      */
-    public List<DummyChannel> getChannelByPeriod(Long period) {
-        return dataMap.getOrDefault(period, new CopyOnWriteArrayList<>());
+    public List<DummyChannel> getChannelByCycle(Long cycle) {
+        return dataMap.getOrDefault(cycle, new CopyOnWriteArrayList<>());
     }
 }
 

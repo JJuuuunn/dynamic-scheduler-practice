@@ -1,12 +1,13 @@
 package com.jjuuuunn.dynamicscheduler.dummyChannel.controller;
 
-import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.DummyChannelCreateRequest;
-import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.DummyChannelDeleteRequest;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.request.DummyChannelCreateRequest;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.request.DummyChannelDeleteRequest;
 import com.jjuuuunn.dynamicscheduler.dummyChannel.service.DummyChannelService;
 import com.jjuuuunn.dynamicscheduler.infra.model.CommonMessageEnum;
 import com.jjuuuunn.dynamicscheduler.infra.model.CustomResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +23,20 @@ public class DummyChannelController {
     @PostMapping
     public CustomResponse<CommonMessageEnum> addDummyDataChannel(
             @Schema(description = "Device, Channel, Order, 최소값, 최대값, TenantId, PlatformCode, 생성주기",
-                    example = "{\"deviceCode\": \"device123\",\n" +
-                            "\"channelCode\": \"code001\",\n" +
-                            "\"channelTypeId\": 1,\n" +
-                            "\"minValue\": 100,\n" +
-                            "\"maxValue\": 200,\n" +
-                            "\"tenantId\": 1,\n" +
-                            "\"platformCode\": \"platform01\",\n" +
-                            "\"generationInterval\": 3}")
+                    example = """
+                {
+                    "deviceCode": "device123",
+                    "channelCode": "code001",
+                    "channelTypeId": 1,
+                    "minValue": 100,
+                    "maxValue": 200,
+                    "tenantId": 1,
+                    "platformCode": "platform01",
+                    "cycle": 3,
+                    "kafkaTopic": "SMP",
+                }
+                """)
+            @Valid
             @RequestBody
             DummyChannelCreateRequest request) {
         log.info("DummyDataController - addDummyDataChannel : {}", request);

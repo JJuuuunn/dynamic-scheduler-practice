@@ -1,9 +1,10 @@
 package com.jjuuuunn.dynamicscheduler.dummyChannel.service;
 
-import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.DummyChannelCreateRequest;
-import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.DummyChannelDeleteRequest;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.component.DummyChannelScheduler;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.request.DummyChannelCreateRequest;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.request.DummyChannelDeleteRequest;
 import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.RunningSchedulerCountDto;
-import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.RunningSchedulerCountListResponse;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.response.RunningSchedulerCountListResponse;
 import com.jjuuuunn.dynamicscheduler.dummyChannel.model.entity.DummyChannel;
 import com.jjuuuunn.dynamicscheduler.dummyChannel.repository.DummyChannelRepository;
 import com.jjuuuunn.dynamicscheduler.dummyChannel.repository.DummyChannelStore;
@@ -61,9 +62,9 @@ public class DummyChannelService {
         dummyChannelStore.addChannel(entity);
 
         // 5. 스케줄러에 새로운 스케줄 등록
-        scheduler.addNewSchedule(entity.getGenerationInterval());
+        scheduler.addNewSchedule(entity.getCycle());
 
-        log.info("새로운 {}초 주기 스케줄 등록 완료", entity.getGenerationInterval());
+        log.info("새로운 {}초 주기 스케줄 등록 완료", entity.getCycle());
         return CommonMessageEnum.SAVE;
     }
 
@@ -94,7 +95,7 @@ public class DummyChannelService {
         dummyChannelStore.removeChannel(dummyChannel);
 
         // 4. 스케줄러에서 데이터 제거
-        scheduler.removeSchedule(dummyChannel.getGenerationInterval());
+        scheduler.removeSchedule(dummyChannel.getCycle());
 
         return CommonMessageEnum.DELETE;
     }
@@ -111,11 +112,11 @@ public class DummyChannelService {
         // 2. 스케줄러 목록을 DTO로 변환
         List<RunningSchedulerCountDto> runningSchedulerCountDtoList = scheduledTasks.entrySet().stream()
                 .map(entry -> {
-                    Long period = entry.getKey();
-                    int taskCount = dummyChannelStore.getAllChannel().get(period).size();
+                    Long cycle = entry.getKey();
+                    int taskCount = dummyChannelStore.getAllChannel().get(cycle).size();
 
                     return RunningSchedulerCountDto.builder()
-                            .period(period)
+                            .cycle(cycle)
                             .taskCount(taskCount)
                             .build();
                 })

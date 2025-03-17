@@ -1,5 +1,6 @@
-package com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto;
+package com.jjuuuunn.dynamicscheduler.dummyChannel.model.response;
 
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.RunningSchedulerCountDto;
 import lombok.Builder;
 
 import java.util.List;

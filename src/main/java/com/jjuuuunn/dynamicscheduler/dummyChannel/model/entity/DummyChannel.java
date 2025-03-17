@@ -46,12 +46,15 @@ public class DummyChannel {
     private String platformCode;
 
     @Comment("생성 주기")
-    @Column(name = "generation_interval", nullable = false)
-    private Long generationInterval;
+    @Column(name = "cycle", nullable = false)
+    private Long cycle;
 
+    @Comment("Kafka Topic")
+    @Column(name = "kafka_topic", nullable = false)
+    private String kafkaTopic;
 }
 
-// CREATE TABLE dummy_data (
+// CREATE TABLE dummy_channel (
 //     id                   BIGINT          auto_increment primary key,
 //     device_code          VARCHAR(255)    NOT NULL comment '디바이스 이름',
 //     channel_code         VARCHAR(255)    NOT NULL comment '채널 이름',
@@ -60,5 +63,6 @@ public class DummyChannel {
 //     tenant_id            INT             NOT NULL comment '테넌트 값',
 //     platform_code        VARCHAR(255)    NOT NULL comment '플랫폼 이름',
 //     channel_type_id      SMALLINT        NOT NULL comment '채널 데이터 종류별 seq(order)',
-//     generation_interval  BIGINT          NOT NULL comment '생성 주기'
+//     cycle                BIGINT          NOT NULL comment '생성 주기'
+//     kafka_topic          VARCHAR(255)    NOT NULL comment 'Kafka Topic'
 // ) comment '더미 데이터 동적 생성';

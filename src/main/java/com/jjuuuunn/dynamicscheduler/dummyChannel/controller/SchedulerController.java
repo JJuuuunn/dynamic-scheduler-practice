@@ -1,6 +1,6 @@
 package com.jjuuuunn.dynamicscheduler.dummyChannel.controller;
 
-import com.jjuuuunn.dynamicscheduler.dummyChannel.model.dto.RunningSchedulerCountListResponse;
+import com.jjuuuunn.dynamicscheduler.dummyChannel.model.response.RunningSchedulerCountListResponse;
 import com.jjuuuunn.dynamicscheduler.dummyChannel.service.DummyChannelService;
 import com.jjuuuunn.dynamicscheduler.infra.model.CustomResponse;
 import lombok.RequiredArgsConstructor;

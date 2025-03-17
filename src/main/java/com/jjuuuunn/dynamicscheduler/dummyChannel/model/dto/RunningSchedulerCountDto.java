@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record RunningSchedulerCountDto(
-        Long period,
+        Long cycle,
         int taskCount
 ) {
 }

@@ -3,14 +3,15 @@ POST http://localhost:8080/api/dummyChannel
 Content-Type: application/json
 
 {
-  "deviceCode": "deviceTest1",
-  "channelCode": "code040",
-  "channelTypeId": 1,
+  "deviceCode": "TEST-DEVICE",
+  "channelCode": "TEST-CHANNEL-1",
+  "channelTypeId": 0,
   "minValue": 100,
   "maxValue": 200,
-  "tenantId": 1,
-  "platformCode": "platform01",
-  "generationInterval": 11
+  "tenantId": 245,
+  "platformCode": "SIMMTECH",
+  "cycle": 5,
+  "kafkaTopic": "smp"
 }
 
 ### 더미 채널 삭제
@@ -18,9 +19,9 @@ DELETE http://localhost:8080/api/dummyChannel
 Content-Type: application/json
 
 {
-  "deviceCode": "deviceTest1",
-  "channelCode": "code040",
-  "channelTypeId": 1,
+  "deviceCode": "TEST-DEVICE",
+  "channelCode": "TEST-CHANNEL-1",
+  "channelTypeId": 0,
   "tenantId": 1,
   "platformCode": "platform01"
 }
